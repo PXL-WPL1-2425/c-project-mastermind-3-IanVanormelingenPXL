@@ -7,6 +7,9 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/th.jpg"/>
+        </Grid.Background>
 
         <StackPanel x:Name="MenuPanel" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Label Content="Mastermind" FontSize="36" FontWeight="Bold" HorizontalAlignment="Center"/>
