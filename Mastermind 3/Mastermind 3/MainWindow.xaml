@@ -1,0 +1,59 @@
+﻿<Window x:Class="Mastermind_3.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Mastermind_3"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+
+            <Grid.Background>
+                <ImageBrush ImageSource="/th.jpg" />
+            </Grid.Background>
+
+
+            <StackPanel x:Name="MenuPanel" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Label Content="Mastermind" FontSize="36" FontWeight="Bold" HorizontalAlignment="Center"/>
+                <Button Content="Nieuw Spel" Click="StartGame_Click" Width="200" Height="50" Margin="0,10,0,0" />
+                <Button Content="Highscores" Click="ShowHighscores_Click" Width="200" Height="50" Margin="0,10,0,0" />
+                <Button Content="Afsluiten" Click="ExitGame_Click" Width="200" Height="50" Margin="0,10,0,0" />
+            </StackPanel>
+
+
+            <Grid x:Name="GamePanel" Visibility="Collapsed">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="200,112,0,0">
+                    <ComboBox x:Name="Kleurcode1" Width="150" />
+                    <ComboBox x:Name="Kleurcode2" Width="150" />
+                    <ComboBox x:Name="Kleurcode3" Width="150" />
+                    <ComboBox x:Name="Kleurcode4" Width="150" />
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="198,0,0,0">
+                    <Label x:Name="Kleur1" Width="150" Height="100" BorderThickness="2" BorderBrush="Gray" Background="#FFFAFAFA" />
+                    <Label x:Name="Kleur2" Width="150" Height="100" BorderThickness="2" BorderBrush="Gray" Background="White" />
+                    <Label x:Name="Kleur3" Width="150" Height="100" BorderThickness="2" BorderBrush="Gray" Background="White" />
+                    <Label x:Name="Kleur4" Width="150" Height="100" BorderThickness="2" BorderBrush="Gray" Background="White" />
+                </StackPanel>
+
+                <Button Content="Check code" HorizontalAlignment="Left" VerticalAlignment="Top" Width="311" Height="100" FontSize="24" Click="CheckCode_Click" Margin="345,-2,0,0" />
+                <Label Content="Pogingen:" Margin="200,0,460,402" Background="White" FontSize="15" />
+                <TextBox x:Name="TotalAttemptsTextBox" HorizontalAlignment="Left" Height="32" Margin="252,38,0,0" TextWrapping="Wrap" Text="0" FontSize="20" VerticalAlignment="Top" Width="36" />
+                <TextBox x:Name="CountdownTextBox" HorizontalAlignment="Left" Margin="705,32,0,0" TextWrapping="Wrap" Text="10" VerticalAlignment="Top" Width="36" Height="38" FontSize="24" />
+                <Label Content="Time remaining" HorizontalAlignment="Left" Height="31" Margin="661,1,0,0" VerticalAlignment="Top" Width="124" FontSize="16" Background="White" />
+                <StackPanel Orientation="Vertical" VerticalAlignment="Top" Margin="95,289,-95,0" Height="97">
+                    <Label Content="Geschiedenis:" FontWeight="Medium" Background="White" Width="98" />
+                    <ListBox x:Name="HistoryListBox" Height="70" Width="600" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="20,0,0,146">
+                    <Label Content="Score:" FontWeight="Bold" Background="White" Width="53" />
+                    <Label x:Name="ScoreLabel" Content="0" FontWeight="Bold" Margin="5,0,0,0" VerticalAlignment="Center" Background="White" />
+                </StackPanel>
+
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0">
+                    <Label Content="Spelers:" FontSize="16" FontWeight="Bold" />
+                    <ListBox x:Name="SpelersListBox" Width="200" Height="100" />
+                </StackPanel>
+            </Grid>
+        </Grid>
+</Window>
