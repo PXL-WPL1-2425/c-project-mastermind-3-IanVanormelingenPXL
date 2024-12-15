@@ -22,6 +22,29 @@
 
 
             <Grid x:Name="GamePanel" Visibility="Collapsed">
+            <ComboBox x:Name="Kleurcodes1" Width="100" Margin="5">
+                <ComboBox.ToolTip>
+                    <ToolTip x:Name="ToolTipKleurcode1"/>
+                </ComboBox.ToolTip>
+            </ComboBox>
+
+            <ComboBox x:Name="Kleurcodes2" Width="100" Margin="5">
+                <ComboBox.ToolTip>
+                    <ToolTip x:Name="ToolTipKleurcode2"/>
+                </ComboBox.ToolTip>
+            </ComboBox>
+
+            <ComboBox x:Name="Kleurcodes3" Width="100" Margin="5">
+                <ComboBox.ToolTip>
+                    <ToolTip x:Name="ToolTipKleurcode3"/>
+                </ComboBox.ToolTip>
+            </ComboBox>
+
+            <ComboBox x:Name="Kleurcodes4" Width="100" Margin="5">
+                <ComboBox.ToolTip>
+                    <ToolTip x:Name="ToolTipKleurcode4"/>
+                </ComboBox.ToolTip>
+            </ComboBox>
             <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center" Margin="0,10,0,10">
                 <ComboBox x:Name="Kleurcode1" Width="100" Margin="5" />
                 <ComboBox x:Name="Kleurcode2" Width="100" Margin="5" />

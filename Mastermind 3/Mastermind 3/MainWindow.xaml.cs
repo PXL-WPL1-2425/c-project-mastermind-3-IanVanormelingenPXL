@@ -200,6 +200,56 @@ namespace Mastermind_3
             }
         }
 
+        private void GeefFeedbackOpGok(List<string> gok)
+        {
+            // Stel de feedback voor elke kleur in de gok in
+            for (int i = 0; i < gok.Count; i++)
+            {
+                string gokKleur = gok[i];
+                string juisteKleur = geheimeCode[i];
+
+                // Kleur feedback en tooltip instellen
+                if (gokKleur == juisteKleur)
+                {
+                    // Correcte kleur op juiste plaats (rode rand)
+                    SetRandEnTooltip(i, "Juiste kleur, juiste positie", Brushes.Red);
+                }
+                else if (geheimeCode.Contains(gokKleur))
+                {
+                    // Juiste kleur, foute positie (witte rand)
+                    SetRandEnTooltip(i, "Juiste kleur, foute positie", Brushes.White);
+                }
+                else
+                {
+                    // Foute kleur (geen rand)
+                    SetRandEnTooltip(i, "Foute kleur", Brushes.Transparent);
+                }
+            }
+        }
+
+        private void SetRandEnTooltip(int index, string feedbackText, Brush borderColor)
+        {
+            // Wijzig de randkleur en tooltip van de juiste ComboBox
+            switch (index)
+            {
+                case 0:
+                    Kleurcode1.BorderBrush = borderColor;
+                    ToolTipKleurcode1.Content = feedbackText;
+                    break;
+                case 1:
+                    Kleurcode2.BorderBrush = borderColor;
+                    ToolTipKleurcode2.Content = feedbackText;
+                    break;
+                case 2:
+                    Kleurcode3.BorderBrush = borderColor;
+                    ToolTipKleurcode3.Content = feedbackText;
+                    break;
+                case 3:
+                    Kleurcode4.BorderBrush = borderColor;
+                    ToolTipKleurcode4.Content = feedbackText;
+                    break;
+            }
+        }
 
         private void Timer_Tick(object sender, EventArgs e)
         {
