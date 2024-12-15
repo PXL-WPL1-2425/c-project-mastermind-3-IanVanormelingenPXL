@@ -47,8 +47,10 @@
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="20,0,0,146">
                     <Label Content="Score:" FontWeight="Bold" Background="White" Width="53" />
-                    <Label x:Name="ScoreLabel" Content="0" FontWeight="Bold" Margin="5,0,0,0" VerticalAlignment="Center" Background="White" />
-                </StackPanel>
+                <Label x:Name="SpelerLabel" Content="Actieve speler: " FontSize="14" />
+                <Label x:Name="ScoreLabel" Content="Pogingen: 0 | Score: 0" FontSize="14" />
+
+            </StackPanel>
 
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0">
                     <Label Content="Spelers:" FontSize="16" FontWeight="Bold" />
