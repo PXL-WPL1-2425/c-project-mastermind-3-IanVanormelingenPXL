@@ -22,14 +22,16 @@
 
 
             <Grid x:Name="GamePanel" Visibility="Collapsed">
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="200,112,0,0">
-                    <ComboBox x:Name="Kleurcode1" Width="150" />
-                    <ComboBox x:Name="Kleurcode2" Width="150" />
-                    <ComboBox x:Name="Kleurcode3" Width="150" />
-                    <ComboBox x:Name="Kleurcode4" Width="150" />
-                </StackPanel>
+            <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center" Margin="0,10,0,10">
+                <ComboBox x:Name="Kleurcode1" Width="100" Margin="5" />
+                <ComboBox x:Name="Kleurcode2" Width="100" Margin="5" />
+                <ComboBox x:Name="Kleurcode3" Width="100" Margin="5" />
+                <ComboBox x:Name="Kleurcode4" Width="100" Margin="5" />
+                <Button x:Name="CheckCodeButton" Content="Check Code" Width="120" Margin="10,0,0,0" Click="CheckCode_Click"/>
+                <Button x:Name="HintButton" Content="Koop Hint" Width="120" Margin="10,0,0,0" Click="HintButton_Click"/>
+            </StackPanel>
 
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="198,0,0,0">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="198,0,0,0">
                     <Label x:Name="Kleur1" Width="150" Height="100" BorderThickness="2" BorderBrush="Gray" Background="#FFFAFAFA" />
                     <Label x:Name="Kleur2" Width="150" Height="100" BorderThickness="2" BorderBrush="Gray" Background="White" />
                     <Label x:Name="Kleur3" Width="150" Height="100" BorderThickness="2" BorderBrush="Gray" Background="White" />

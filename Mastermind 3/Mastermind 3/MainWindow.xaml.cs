@@ -141,6 +141,65 @@ namespace Mastermind_3
             timer.Tick += Timer_Tick;
             timer.Start();
         }
+        private void HintButton_Click(object sender, RoutedEventArgs e)
+        {
+           
+            MessageBoxResult keuze = MessageBox.Show(
+                "Wil je een hint voor een juiste kleur (kost 15 strafpunten) of een juiste kleur op de juiste plaats (kost 25 strafpunten)?\n\n" +
+                "Ja = Juiste kleur (15 punten)\nNee = Juiste kleur op juiste plaats (25 punten)\nAnnuleren = Geen hint kopen.",
+                "Hint Kopen",
+                MessageBoxButton.YesNoCancel,
+                MessageBoxImage.Question
+            );
+
+            if (keuze == MessageBoxResult.Cancel) return; 
+
+            if (keuze == MessageBoxResult.Yes)
+            {
+                
+                if (currentScore < 15)
+                {
+                    MessageBox.Show("Je hebt niet genoeg punten om een hint te kopen!", "Niet genoeg punten", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+
+                GeefHintJuisteKleur();
+                currentScore -= 15; 
+            }
+            else if (keuze == MessageBoxResult.No)
+            {
+                
+                if (currentScore < 25)
+                {
+                    MessageBox.Show("Je hebt niet genoeg punten om een hint te kopen!", "Niet genoeg punten", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+
+                GeefHintJuistePlaats();
+                currentScore -= 25;
+            }
+
+            UpdateUI(); 
+        }
+
+        private void GeefHintJuisteKleur()
+        {
+            
+            Random rand = new Random();
+            string hintKleur = geheimeCode[rand.Next(geheimeCode.Count)];
+            MessageBox.Show($"Hint: Eén van de kleuren in de geheime code is '{hintKleur}'.", "Hint - Juiste Kleur", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        private void GeefHintJuistePlaats()
+        {
+            
+            for (int i = 0; i < geheimeCode.Count; i++)
+            {
+                MessageBox.Show($"Hint: Op positie {i + 1} zit de kleur '{geheimeCode[i]}'.", "Hint - Juiste Kleur op Juiste Plaats", MessageBoxButton.OK, MessageBoxImage.Information);
+                break;
+            }
+        }
+
 
         private void Timer_Tick(object sender, EventArgs e)
         {
