@@ -8,79 +8,72 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
 
-            <Grid.Background>
-                <ImageBrush ImageSource="/th.jpg" />
-            </Grid.Background>
+        <StackPanel x:Name="MenuPanel" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Label Content="Mastermind" FontSize="36" FontWeight="Bold" HorizontalAlignment="Center"/>
+            <Button Content="Nieuw Spel" Click="StartGame_Click" Width="200" Height="50" Margin="0,10,0,0" />
+            <Button Content="Highscores" Click="ShowHighscores_Click" Width="200" Height="50" Margin="0,10,0,0" />
+            <Button Content="Afsluiten" Click="ExitGame_Click" Width="200" Height="50" Margin="0,10,0,0" />
+        </StackPanel>
 
+   
+        <StackPanel x:Name="SpelersPanel" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10">
 
-            <StackPanel x:Name="MenuPanel" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
-                <Label Content="Mastermind" FontSize="36" FontWeight="Bold" HorizontalAlignment="Center"/>
-                <Button Content="Nieuw Spel" Click="StartGame_Click" Width="200" Height="50" Margin="0,10,0,0" />
-                <Button Content="Highscores" Click="ShowHighscores_Click" Width="200" Height="50" Margin="0,10,0,0" />
-                <Button Content="Afsluiten" Click="ExitGame_Click" Width="200" Height="50" Margin="0,10,0,0" />
-            </StackPanel>
+        </StackPanel>
 
-
-            <Grid x:Name="GamePanel" Visibility="Collapsed">
+ 
+        <Grid x:Name="GamePanel" Visibility="Collapsed">
             <ComboBox x:Name="Kleurcodes1" Width="100" Margin="5">
                 <ComboBox.ToolTip>
-                    <ToolTip x:Name="ToolTipKleurcode1"/>
+                    <ToolTip x:Name="ToolTipKleurcode1" Content="Kleur 1"/>
                 </ComboBox.ToolTip>
             </ComboBox>
-
             <ComboBox x:Name="Kleurcodes2" Width="100" Margin="5">
                 <ComboBox.ToolTip>
-                    <ToolTip x:Name="ToolTipKleurcode2"/>
+                    <ToolTip x:Name="ToolTipKleurcode2" Content="Kleur 2"/>
                 </ComboBox.ToolTip>
             </ComboBox>
-
             <ComboBox x:Name="Kleurcodes3" Width="100" Margin="5">
                 <ComboBox.ToolTip>
-                    <ToolTip x:Name="ToolTipKleurcode3"/>
+                    <ToolTip x:Name="ToolTipKleurcode3" Content="Kleur 3"/>
+                </ComboBox.ToolTip>
+            </ComboBox>
+            <ComboBox x:Name="Kleurcodes4" Width="100" Margin="5">
+                <ComboBox.ToolTip>
+                    <ToolTip x:Name="ToolTipKleurcode4" Content="Kleur 4"/>
                 </ComboBox.ToolTip>
             </ComboBox>
 
-            <ComboBox x:Name="Kleurcodes4" Width="100" Margin="5">
-                <ComboBox.ToolTip>
-                    <ToolTip x:Name="ToolTipKleurcode4"/>
-                </ComboBox.ToolTip>
-            </ComboBox>
+
             <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Center" Margin="0,10,0,10">
-                <ComboBox x:Name="Kleurcode1" Width="100" Margin="5" />
-                <ComboBox x:Name="Kleurcode2" Width="100" Margin="5" />
-                <ComboBox x:Name="Kleurcode3" Width="100" Margin="5" />
-                <ComboBox x:Name="Kleurcode4" Width="100" Margin="5" />
+                <ComboBox x:Name="Kleurcode1" Width="100" Margin="5" ItemsSource="{Binding beschikbareKleuren}" />
+                <ComboBox x:Name="Kleurcode2" Width="100" Margin="5" ItemsSource="{Binding beschikbareKleuren}" />
+                <ComboBox x:Name="Kleurcode3" Width="100" Margin="5" ItemsSource="{Binding beschikbareKleuren}" />
+                <ComboBox x:Name="Kleurcode4" Width="100" Margin="5" ItemsSource="{Binding beschikbareKleuren}" />
                 <Button x:Name="CheckCodeButton" Content="Check Code" Width="120" Margin="10,0,0,0" Click="CheckCode_Click"/>
                 <Button x:Name="HintButton" Content="Koop Hint" Width="120" Margin="10,0,0,0" Click="HintButton_Click"/>
             </StackPanel>
-
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="198,0,0,0">
-                    <Label x:Name="Kleur1" Width="150" Height="100" BorderThickness="2" BorderBrush="Gray" Background="#FFFAFAFA" />
-                    <Label x:Name="Kleur2" Width="150" Height="100" BorderThickness="2" BorderBrush="Gray" Background="White" />
-                    <Label x:Name="Kleur3" Width="150" Height="100" BorderThickness="2" BorderBrush="Gray" Background="White" />
-                    <Label x:Name="Kleur4" Width="150" Height="100" BorderThickness="2" BorderBrush="Gray" Background="White" />
-                </StackPanel>
-
-                <Button Content="Check code" HorizontalAlignment="Left" VerticalAlignment="Top" Width="311" Height="100" FontSize="24" Click="CheckCode_Click" Margin="345,-2,0,0" />
-                <Label Content="Pogingen:" Margin="200,0,460,402" Background="White" FontSize="15" />
-                <TextBox x:Name="TotalAttemptsTextBox" HorizontalAlignment="Left" Height="32" Margin="252,38,0,0" TextWrapping="Wrap" Text="0" FontSize="20" VerticalAlignment="Top" Width="36" />
-                <TextBox x:Name="CountdownTextBox" HorizontalAlignment="Left" Margin="705,32,0,0" TextWrapping="Wrap" Text="10" VerticalAlignment="Top" Width="36" Height="38" FontSize="24" />
-                <Label Content="Time remaining" HorizontalAlignment="Left" Height="31" Margin="661,1,0,0" VerticalAlignment="Top" Width="124" FontSize="16" Background="White" />
-                <StackPanel Orientation="Vertical" VerticalAlignment="Top" Margin="95,289,-95,0" Height="97">
-                    <Label Content="Geschiedenis:" FontWeight="Medium" Background="White" Width="98" />
-                    <ListBox x:Name="HistoryListBox" Height="70" Width="600" />
-                </StackPanel>
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="20,0,0,146">
-                    <Label Content="Score:" FontWeight="Bold" Background="White" Width="53" />
-                <Label x:Name="SpelerLabel" Content="Actieve speler: " FontSize="14" />
-                <Label x:Name="ScoreLabel" Content="Pogingen: 0 | Score: 0" FontSize="14" />
-
+                <Label x:Name="Kleur1" Width="150" Height="100" BorderThickness="2" BorderBrush="Gray" Background="#FFFAFAFA"/>
+                <Label x:Name="Kleur2" Width="150" Height="100" BorderThickness="2" BorderBrush="Gray" Background="White"/>
+                <Label x:Name="Kleur3" Width="150" Height="100" BorderThickness="2" BorderBrush="Gray" Background="White"/>
+                <Label x:Name="Kleur4" Width="150" Height="100" BorderThickness="2" BorderBrush="Gray" Background="White"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" VerticalAlignment="Top" Margin="95,289,-95,0" Height="97">
+                <Label Content="Geschiedenis:" FontWeight="Medium" Background="White" Width="98" />
+                <ListBox x:Name="HistoryListBox" Height="70" Width="600" />
             </StackPanel>
 
-                <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0">
-                    <Label Content="Spelers:" FontSize="16" FontWeight="Bold" />
-                    <ListBox x:Name="SpelersListBox" Width="200" Height="100" />
-                </StackPanel>
-            </Grid>
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="20,0,0,146">
+                <Label Content="Score:" FontWeight="Bold" Background="White" Width="53" />
+                <Label x:Name="SpelerLabel" Content="Actieve speler: " FontSize="14" />
+                <Label x:Name="ScoreLabel" Content="Pogingen: 0 | Score: 0" FontSize="14" />
+            </StackPanel>
+
+           
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0">
+                <Label Content="Spelers:" FontSize="16" FontWeight="Bold"/>
+                <ListBox x:Name="SpelersListBox" Width="200" Height="100"/>
+            </StackPanel>
         </Grid>
+    </Grid>
 </Window>

@@ -31,8 +31,165 @@ namespace Mastermind_3
         private const int MaxAttempts = 10;
         private List<string> attemptHistory = new List<string>();
         private int currentScore = 0;
+        
+        private int aantalKleuren = 4; 
 
-        public MainWindow()
+       
+        private List<string> beschikbareKleuren = new List<string> { "Rood", "Blauw", "Groen", "Geel", "Oranje", "Paars" };
+
+       
+        private void AantalKleurenComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (AantalKleurenComboBox.SelectedItem != null)
+            {
+                
+                string selectie = (AantalKleurenComboBox.SelectedItem as ComboBoxItem).Content.ToString();
+
+               
+                if (selectie == "4 Kleuren")
+                {
+                    aantalKleuren = 4;
+                }
+                else if (selectie == "5 Kleuren")
+                {
+                    aantalKleuren = 5;
+                }
+                else if (selectie == "6 Kleuren")
+                {
+                    aantalKleuren = 6;
+                }
+
+               
+                GenereerGeheimeCode();
+            }
+        }
+        private void UpdateKleurkeuze()
+        {
+            // Pas de beschikbare kleuren aan afhankelijk van het aantal geselecteerde kleuren
+            if (aantalKleuren == 4)
+            {
+                beschikbareKleuren = new List<string> { "Rood", "Blauw", "Groen", "Geel" };
+            }
+            else if (aantalKleuren == 5)
+            {
+                beschikbareKleuren = new List<string> { "Rood", "Blauw", "Groen", "Geel", "Oranje" };
+            }
+            else if (aantalKleuren == 6)
+            {
+                beschikbareKleuren = new List<string> { "Rood", "Blauw", "Groen", "Geel", "Oranje", "Paars" };
+            }
+
+            // Update de ComboBoxen met de nieuwe lijst van kleuren
+            Kleurcode1.ItemsSource = beschikbareKleuren;
+            Kleurcode2.ItemsSource = beschikbareKleuren;
+            Kleurcode3.ItemsSource = beschikbareKleuren;
+            Kleurcode4.ItemsSource = beschikbareKleuren;
+        }
+        private void GeefFeedbackOpGok(List<string> gok)
+        {
+            if (gok.Count != aantalKleuren)
+            {
+                MessageBox.Show("Je gok moet hetzelfde aantal kleuren bevatten als de geheime code.");
+                return;
+            }
+
+            // Stel de feedback voor elke kleur in de gok in
+            for (int i = 0; i < gok.Count; i++)
+            {
+                string gokKleur = gok[i];
+                string juisteKleur = geheimeCode[i];
+
+                // Kleur feedback en tooltip instellen
+                if (gokKleur == juisteKleur)
+                {
+                    // Correcte kleur op juiste plaats (rode rand)
+                    SetRandEnTooltip(i, "Juiste kleur, juiste positie", Brushes.Red);
+                }
+                else if (geheimeCode.Contains(gokKleur))
+                {
+                    // Juiste kleur, foute positie (witte rand)
+                    SetRandEnTooltip(i, "Juiste kleur, foute positie", Brushes.White);
+                }
+                else
+                {
+                    // Foute kleur (geen rand)
+                    SetRandEnTooltip(i, "Foute kleur", Brushes.Transparent);
+                }
+            }
+        }
+        // Aantal spelers en huidige speler
+        private List<string> spelers = new List<string>();
+        private int huidigeSpelerIndex = 0;  // De index van de actieve speler
+
+        // Methode om de spelers toe te voegen en labels te maken
+        private void VoegSpelersToe()
+        {
+            // Voorbeeld van hoe de lijst met spelers te maken
+            spelers.Add("Speler 1");
+            spelers.Add("Speler 2");
+            spelers.Add("Speler 3");
+            // Voeg hier meer spelers toe als dat nodig is.
+
+            // Voor elk van de spelers een label maken
+            foreach (var speler in spelers)
+            {
+                Label spelerLabel = new Label
+                {
+                    Content = speler,
+                    Margin = new Thickness(10),
+                    Padding = new Thickness(10),
+                    HorizontalContentAlignment = HorizontalAlignment.Center,
+                    VerticalAlignment = VerticalAlignment.Center,
+                    Background = huidigeSpelerIndex == spelers.IndexOf(speler) ? new SolidColorBrush(Colors.LightGreen) : new SolidColorBrush(Colors.LightGray),
+                    Foreground = new SolidColorBrush(Colors.Black),
+                    Width = 100
+                };
+
+                // Voeg het label toe aan de StackPanel
+                SpelersPanel.Children.Add(spelerLabel);
+            }
+        }
+
+        // Methode om de actieve speler te wisselen
+        private void WisselSpeler()
+        {
+            // Verander de actieve speler
+            huidigeSpelerIndex = (huidigeSpelerIndex + 1) % spelers.Count;
+
+            // Vernieuw de labels met de juiste achtergrondkleur
+            SpelersPanel.Children.Clear();
+            VoegSpelersToe();
+        }
+
+        // Oproepen van VoegSpelersToe wanneer het spel start
+        private void StartGame()
+        {
+            VoegSpelersToe();
+            // De rest van de game-logica
+        }
+
+        // Het wisselen van de actieve speler kan bijvoorbeeld bij een speleinde worden gedaan
+        private void SpeelEinde()
+        {
+            WisselSpeler();
+        }
+
+
+        private void GenereerGeheimeCode()
+        {
+            Random random = new Random();
+            geheimeCode.Clear();
+
+            for (int i = 0; i < aantalKleuren; i++)
+            {
+                
+                string gekozenKleur = beschikbareKleuren[random.Next(0, aantalKleuren)];
+                geheimeCode.Add(gekozenKleur);
+            }
+
+            
+            ToonGeheimeCode(); 
+            public MainWindow()
         {
             InitializeComponent();
         }
